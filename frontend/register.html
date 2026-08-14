@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skill2Intern | Register</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f9ff, #eef3f8);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            min-height: 600px;
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        /* LEFT SIDE */
+
+        .left {
+            width: 45%;
+            background: linear-gradient(135deg, #007BFF, #0056b3);
+            color: white;
+            padding: 60px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .left h1 {
+            font-size: 40px;
+            margin-bottom: 18px;
+        }
+
+        .left h1 span {
+            color: #b8dcff;
+        }
+
+        .left p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #e7f2ff;
+        }
+
+        .tagline {
+            margin-top: 30px;
+            font-size: 15px;
+            color: #d8ebff;
+        }
+
+        /* RIGHT SIDE */
+
+        .right {
+            width: 55%;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-box {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-box h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .form-box .subtitle {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d5d5d5;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #007BFF;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            background: #0069d9;
+        }
+
+        .login-text {
+            text-align: center;
+            margin-top: 22px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 92%;
+                min-height: auto;
+            }
+
+            .left {
+                display: none;
+            }
+
+            .right {
+                width: 100%;
+                padding: 40px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="left">
+
+            <h1>Skill<span>2</span>Intern</h1>
+
+            <p>Discover opportunities that match your skills, interests and career goals.</p>
+
+            <p class="tagline">Guiding students to the right opportunity.</p>
+
+        </div>
+
+        <div class="right">
+
+            <div class="form-box">
+
+                <h2>Create Account</h2>
+                <p class="subtitle">Start your journey with Skill2Intern</p>
+
+                <form id="registerForm">
+
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a password"
+                            required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            required>
+                    </div>
+
+                    <button type="submit" class="register-btn">
+                        Create Account
+                    </button>
+
+                </form>
+
+                <div id="message" class="message"></div>
+
+                <p class="login-text">
+                    Already have an account?
+                    <a href="login.html">Login</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+
+            let message = document.getElementById("message");
+
+            if (password !== confirmPassword) {
+
+                message.style.color = "red";
+                message.innerText = "Passwords do not match!";
+                return;
+
+            }
+
+            let user = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+            localStorage.setItem("careerCompassUser", JSON.stringify(user));
+
+            message.style.color = "#28A745";
+            message.innerText = "Registration successful! Redirecting...";
+
+            setTimeout(function() {
+                window.location.href = "login.html";
+            }, 1500);
+
+        });
+
+    </script>
+
+</body>
+</html>
+```

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skill2Intern | Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f7fbff, #eaf4ff);
+            padding: 20px;
+        }
+
+        .container {
+            width: 900px;
+            max-width: 100%;
+            min-height: 550px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .left {
+            width: 45%;
+            background: linear-gradient(135deg, #007BFF, #0056b3);
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .logo span {
+            color: #dff0ff;
+        }
+
+        .left h1 {
+            font-size: 38px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .left p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #e6f3ff;
+        }
+
+        .tagline {
+            margin-top: 35px;
+            padding: 12px 15px;
+            border-left: 3px solid #28A745;
+            color: #f0f8ff;
+        }
+
+        /* RIGHT SIDE */
+
+        .right {
+            width: 55%;
+            padding: 45px 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 17px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #007BFF;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #0069d9;
+        }
+
+        .switch {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .switch a {
+            color: #007BFF;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success {
+            color: #28A745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .container {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .left {
+                width: 100%;
+                padding: 30px;
+                text-align: center;
+            }
+
+            .left h1 {
+                font-size: 30px;
+            }
+
+            .logo {
+                margin-bottom: 20px;
+            }
+
+            .tagline {
+                display: none;
+            }
+
+            .right {
+                width: 100%;
+                padding: 35px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="left">
+
+        <div class="logo">
+            Skill<span>2</span>Intern
+        </div>
+
+        <h1>Navigate Your Career With Confidence.</h1>
+
+        <p>Discover internships that match your skills, interests and career goals.</p>
+
+        <div class="tagline">
+            Guiding students to the right opportunity.
+        </div>
+
+    </div>
+
+    <div class="right">
+
+        <div class="form active" id="loginForm">
+
+            <h2>Welcome Back!</h2>
+
+            <p class="subtitle">Login to continue your career journey.</p>
+
+            <div class="message" id="loginMessage"></div>
+
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email">
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+            </div>
+
+            <button class="submit-btn" onclick="login()">Login</button>
+
+            <div class="switch">
+                Don't have an account?
+                <a onclick="showRegister()">Register</a>
+            </div>
+
+        </div>
+
+        <div class="form" id="registerForm">
+
+            <h2>Create Account</h2>
+
+            <p class="subtitle">Start your journey with CareerCompass.</p>
+
+            <div class="message" id="registerMessage"></div>
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name">
+            </div>
+
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="registerEmail" placeholder="Enter your email">
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="registerPassword" placeholder="Create a password">
+            </div>
+
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm your password">
+            </div>
+
+            <button class="submit-btn" onclick="register()">Create Account</button>
+
+            <div class="switch">
+                Already have an account?
+                <a onclick="showLogin()">Login</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function showRegister() {
+
+        document.getElementById("loginForm").classList.remove("active");
+        document.getElementById("registerForm").classList.add("active");
+    }
+
+    function showLogin() {
+
+        document.getElementById("registerForm").classList.remove("active");
+        document.getElementById("loginForm").classList.add("active");
+    }
+
+    function register() {
+
+        let name = document.getElementById("name").value.trim();
+        let email =document.getElementById("registerEmail").value.trim();
+        let password =document.getElementById("registerPassword").value;
+        let confirmPassword =document.getElementById("confirmPassword").value;
+        let message =document.getElementById("registerMessage");
+
+        if (name === "" || email === "" ||
+            password === "" || confirmPassword === "") {
+
+            message.innerText = "Please fill all the fields.";
+            message.className = "message error";
+            message.style.display = "block";
+
+            return;
+        }
+        if (password !== confirmPassword) {
+
+            message.innerText = "Passwords do not match.";
+            message.className = "message error";
+            message.style.display = "block";
+            return;
+        }
+
+        let user = {
+            name: name,
+            email: email,
+            password: password
+        };
+
+        localStorage.setItem("careerCompassUser",JSON.stringify(user));
+
+        message.innerText ="Registration successful! Redirecting to login...";
+        message.className = "message success";
+        message.style.display = "block";
+
+        setTimeout(function () {
+
+            showLogin();
+            document.getElementById("loginEmail").value = email;
+
+        }, 1500);
+
+    }
+
+    function login() {
+
+        let email =document.getElementById("loginEmail").value.trim();
+        let password =document.getElementById("loginPassword").value;
+        let message =document.getElementById("loginMessage");
+        let savedUser =localStorage.getItem("careerCompassUser");
+
+        if (savedUser === null) {
+            message.innerText ="No account found. Please register first.";
+            message.className = "message error";
+            message.style.display = "block";
+            return;
+        }
+        let user = JSON.parse(savedUser);
+        if (email === user.email &&
+            password === user.password) {
+
+            message.innerText ="Login successful!";
+            message.className = "message success";
+            message.style.display = "block";
+
+            setTimeout(function () {
+                window.location.href = "index.html";
+            }, 1000);
+
+        }
+
+        else {
+
+            message.innerText =
+                "Invalid email or password.";
+
+            message.className = "message error";
+            message.style.display = "block";
+
+        }
+
+    }
+
+</script>
+
+</body>
+</html>
