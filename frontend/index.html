@@ -1,297 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROZGAR-AI | Build Your Profile</title>
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
-
- <!-- Navbar -->
-  <nav>
-    <div class="logo">ROZGAR<span>-AI</span></div>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-right">
-      <select class="lang">
-        <option>EN</option>
-        <option>हि</option>
-      </select>
-      
-
 <!-- Login Button -->
-<a href="#" class="login-btn" onclick="openModal()">Login / Sign Up</a>
+  <a href="#" class="login-btn" onclick="openModal()" data-i18n="nav_login">Login / Sign Up</a>
 
-    <!-- Modal -->
-      <div id="loginModal" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
-          <h2 id="modal-title">Login</h2>
+  <!-- Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modal-title">Login</h2>
 
-          <form id="auth-form">
-            <label>Email</label>
-            <input type="email" id="auth-email" placeholder="Enter your email" required>
+      <form id="auth-form">
+        <label>Email</label>
+        <input type="email" id="auth-email" placeholder="Enter your email" required>
 
-            <label>Password</label>
-            <input type="password" id="auth-password" placeholder="Enter your password" required>
-            
-            <!-- Message dikhane ke liye -->
-            <div id="auth-message" style="margin-top:10px; font-size:14px; text-align:center;"></div>
+        <label>Password</label>
+        <input type="password" id="auth-password" placeholder="Enter your password" required>
+        
+        <!-- Message dikhane ke liye -->
+        <div id="auth-message" style="margin-top:10px; font-size:14px; text-align:center;"></div>
 
-            <button type="submit" class="primary-btn" id="auth-submit-btn" style="margin-top:15px;">Login</button>
-            
-            <div style="margin-top:15px; text-align:center; font-size:14px;">
-              <a href="#" id="toggle-auth-mode" style="color: #2563eb; text-decoration: none;">Don't have an account? Sign up</a>
-            </div>
-          </form>
-
-          <div class="divider">OR</div>
-
-          <!-- Google Sign In -->
-          <button class="google-btn">Sign in with Google</button>
+        <button type="submit" class="primary-btn" id="auth-submit-btn" style="margin-top:15px;">Login</button>
+        
+        <div style="margin-top:15px; text-align:center; font-size:14px;">
+          <a href="#" id="toggle-auth-mode" style="color: #2563eb; text-decoration: none;">Don't have an account? Sign up</a>
         </div>
-      </div>
+      </form>
 
+      <div class="divider">OR</div>
 
-
-
+      <!-- Google Sign In -->
+      <button class="google-btn">Sign in with Google</button>
     </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="tag">AI-Powered Career Guidance</div>
-      <h1>Find the <span>Right Internship</span> for Your Future</h1>
-      <p>ROZGAR-AI helps students discover internship opportunities tailored to their skills, education, interests and career goals.</p>
-      <div class="buttons">
-        <a href="#" class="primary-btn">Get Started →</a>
-       
-      </div>
-    </div>
-  </section>
-
- 
-
-
-
-
-
-
-
-  <!-- Section Heading -->
-  <div class="section-heading">
-    <h2>Build Your Profile</h2>
-    <p>Tell us about yourself and we'll surface the best-matched internships for you.</p>
   </div>
-
-  <!-- Profile Box -->
-  <section class="profile">
-    <form class="profile-form">
-        <label><strong>Education Level *</strong></label>
-<select>
-  <option>Select your degree</option>
-  <option>B.Tech</option>
-  <option>M.Tech</option>
-  <option>B.Sc</option>
-  <option>M.Sc</option>
-  <option>B.Com</option>
-  <option>M.Com</option>
-  <option>BBA</option>
-  <option>MBA</option>
-  <option>BA</option>
-  <option>MA</option>
-  <option>LLB</option>
-  <option>LLM</option>
-  <option>MBBS</option>
-  <option>MD</option>
-  <option>PhD</option>
-  <option>Diploma</option>
-  <option>Certificate Course</option>
-</select>
-
-      <label><strong>Skills *</strong></label>
-      <input type="text" placeholder="e.g. Python, Data Analysis, Excel">
-      <small>Separate skills with commas</small>
-<label><strong>Sector Interest</strong></label>
-<select>
-  <option>Choose a sector</option>
-  <option>Information Technology</option>
-  <option>Software Development</option>
-  <option>Data Science / AI</option>
-  <option>Finance & Accounting</option>
-  <option>Marketing & Sales</option>
-  <option>Human Resources</option>
-  <option>Design & UI/UX</option>
-  <option>Healthcare</option>
-  <option>Education & Training</option>
-  <option>Engineering</option>
-  <option>Law & Legal Services</option>
-  <option>Government / Public Sector</option>
-  <option>Media & Communication</option>
-  <option>Research & Development</option>
-</select>
-    
-
-<label><strong>Location Preference</strong></label>
-<select>
-  <option>Any location / Remote</option>
-  <option>Andhra Pradesh</option>
-  <option>Arunachal Pradesh</option>
-  <option>Assam</option>
-  <option>Bihar</option>
-  <option>Chhattisgarh</option>
-  <option>Goa</option>
-  <option>Gujarat</option>
-  <option>Haryana</option>
-  <option>Himachal Pradesh</option>
-  <option>Jharkhand</option>
-  <option>Karnataka</option>
-  <option>Kerala</option>
-  <option>Madhya Pradesh</option>
-  <option>Maharashtra</option>
-  <option>Manipur</option>
-  <option>Meghalaya</option>
-  <option>Mizoram</option>
-  <option>Nagaland</option>
-  <option>Odisha</option>
-  <option>Punjab</option>
-  <option>Rajasthan</option>
-  <option>Sikkim</option>
-  <option>Tamil Nadu</option>
-  <option>Telangana</option>
-  <option>Tripura</option>
-  <option>Uttar Pradesh</option>
-  <option>Uttarakhand</option>
-  <option>West Bengal</option>
-  <option>Delhi (NCT)</option>
-  <option>Jammu & Kashmir</option>
-  <option>Ladakh</option>
-  <option>Puducherry</option>
-  <option>Chandigarh</option>
-  <option>Andaman & Nicobar Islands</option>
-  <option>Dadra & Nagar Haveli and Daman & Diu</option>
-  <option>Lakshadweep</option>
-</select>
-
-
-    <label><strong>Resume (PDF or DOC, max 5MB)</strong></label>
-<div class="upload-box">
-  <input type="file" id="resume" accept=".pdf,.doc,.docx">
-  <label for="resume" class="upload-area">
-    <span class="upload-text">Click to upload your resume</span><br>
-    <span class="upload-sub">Drag & drop or browse files</span>
-  </label>
 </div>
-      <button type="submit" class="primary-btn">Find Internships</button>
-    </form>
-  </section>
-
-
-
-   <section class="features" id="features">
-  <h2>Why ROZGAR-AI?</h2>
-  <p class="section-description">
-    Built for students, powered by AI — giving you a real edge in your internship search.
-  </p>
-
-  <div class="feature-container">
-    <div class="feature-card">
-      <div class="feature-icon">🤖</div>
-      <h3>Smart Matching</h3>
-      <p>AI analyzes your skills, education, and interests to surface the most relevant roles.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">📊</div>
-      <h3>Match Scores</h3>
-      <p>Each listing shows a compatibility percentage so you can prioritize your applications.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">📄</div>
-      <h3>Resume Parsing</h3>
-      <p>Upload your PDF and let us auto-extract your profile — no manual entry needed.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">📍</div>
-      <h3>Location Filter</h3>
-      <p>Search across 50+ cities or find remote-first opportunities across India.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🏢</div>
-      <h3>Top Companies</h3>
-      <p>Listings from India’s leading startups and enterprises, updated daily.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🌐</div>
-      <h3>Bilingual Support</h3>
-      <p>Full English and Hindi interface so every student can navigate with ease.</p>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!-- Profile Form -->
-
-
-<!-- Recommended Internships Section -->
-<section class="recommendations" id="recommendations">
-  <h2>Recommended Internships</h2>
-  <div id="internship-list" class="internship-container"></div>
-</section>
-
-<script>
-  document.getElementById("profile-form").addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    const skills = document.getElementById("skills").value.split(",");
-
-    // 🔹 API call to backend
-    const response = await fetch("http://localhost:5000/api/internships", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ skills: skills })
-    });
-
-    const data = await response.json();
-    const container = document.getElementById("internship-list");
-    container.innerHTML = "";
-
-    data.forEach(internship => {
-      const card = `
-        <div class="internship-card">
-          <span class="category">${internship.category}</span>
-          <h3>${internship.title}</h3>
-          <p><strong>${internship.company}</strong> – ${internship.location}</p>
-          <p><strong>Match:</strong> ${internship.match}%</p>
-          <a href="#" class="details-btn">View Details</a>
-        </div>
-      `;
-      container.innerHTML += card;
-    });
-  });
-</script>
-
-
-
- 
-
-  <footer id="contact">
-    <div class="footer-logo">ROZGAR-AI</div>
-    <p>Guiding students to the right opportunity</p>
-    <p style="margin-top: 10px;">© 2026 ROZGAR-AI. All rights reserved.</p>
-  </footer>
-
-</body>
-</html>
-
