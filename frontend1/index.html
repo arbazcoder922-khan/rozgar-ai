@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROZGAR-AI | Build Your Profile</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">ROZGAR<span>-AI</span></div>
+    <ul class="nav-links">
+      <li><a href="#" data-i18n="nav_home">Home</a></li>
+      <li><a href="#features" data-i18n="nav_features">Features</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <select class="lang" id="lang-select">
+        <option value="en">EN</option>
+        <option value="hi">हि</option>
+      </select>
+      
+      <!-- Login Button -->
+      <a href="#" class="login-btn" onclick="openModal(event)" data-i18n="nav_login">Login / Sign Up</a>
+
+      <!-- Modal -->
+      <div id="loginModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2 data-i18n="nav_login">Login / Sign Up</h2>
+
+          <form>
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password" required>
+
+            <a href="#" class="forgot">Forgot Password?</a>
+
+            <button type="submit" class="primary-btn">Login</button>
+          </form>
+
+          <div class="divider">OR</div>
+
+          <!-- Google Sign In -->
+          <button class="google-btn">Sign in with Google</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="tag" data-i18n="hero_tag">AI-Powered Career Guidance</div>
+      <h1 data-i18n="hero_title">Find the <span>Right Internship</span> for Your Future</h1>
+      <p data-i18n="hero_desc">ROZGAR-AI helps students discover internship opportunities tailored to their skills, education, interests and career goals.</p>
+      <div class="buttons">
+        <a href="#profile" class="primary-btn" data-i18n="hero_btn">Get Started &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Heading -->
+  <div class="section-heading" id="profile">
+    <h2 data-i18n="profile_title">Build Your Profile</h2>
+    <p data-i18n="profile_desc">Tell us about yourself and we'll surface the best-matched internships for you.</p>
+  </div>
+
+  <!-- Profile Box -->
+  <section class="profile">
+    <form class="profile-form" id="profile-form">
+      <label><strong data-i18n="label_education">Education Level *</strong></label>
+      <select required>
+        <option value="">Select your degree</option>
+        <option>B.Tech</option>
+        <option>M.Tech</option>
+        <option>B.Sc</option>
+        <option>B.Com</option>
+        <option>BBA</option>
+        <option>MBA</option>
+        <option>BA</option>
+      </select>
+
+      <label><strong data-i18n="label_skills">Skills *</strong></label>
+      <input type="text" id="skills" placeholder="e.g. Python, Data Analysis, Excel" required>
+      <small data-i18n="skills_desc">Separate skills with commas</small>
+
+      <label><strong data-i18n="label_sector">Sector Interest</strong></label>
+      <select>
+        <option>Choose a sector</option>
+        <option>Information Technology</option>
+        <option>Software Development</option>
+        <option>Data Science / AI</option>
+        <option>Finance & Accounting</option>
+        <option>Marketing & Sales</option>
+      </select>
+    
+      <label><strong data-i18n="label_location">Location Preference</strong></label>
+      <select>
+        <option>Any location / Remote</option>
+        <option>Maharashtra</option>
+        <option>Karnataka</option>
+        <option>Delhi (NCT)</option>
+        <option>Uttar Pradesh</option>
+      </select>
+
+      <label><strong data-i18n="label_resume">Resume (PDF or DOC, max 5MB)</strong></label>
+      <div class="upload-box">
+        <input type="file" id="resumeUpload" accept=".pdf,.doc,.docx">
+        <label for="resumeUpload" class="upload-area">
+          <span class="upload-text" data-i18n="upload_text">Click to upload your resume</span><br>
+          <span class="upload-sub" id="fileNameDisplay" data-i18n="upload_sub">Drag & drop or browse files</span>
+        </label>
+      </div>
+      <button type="submit" class="primary-btn submit-btn" data-i18n="btn_find">Find Internships</button>
+    </form>
+  </section>
+
+  <section class="features" id="features">
+    <h2 data-i18n="features_title">Why ROZGAR-AI?</h2>
+    <p class="section-description" data-i18n="features_desc">
+      Built for students, powered by AI — giving you a real edge in your internship search.
+    </p>
+
+    <div class="feature-container">
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3 data-i18n="feat1_title">Smart Matching</h3>
+        <p data-i18n="feat1_desc">AI analyzes your skills, education, and interests to surface the most relevant roles.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 data-i18n="feat2_title">Match Scores</h3>
+        <p data-i18n="feat2_desc">Each listing shows a compatibility percentage so you can prioritize your applications.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3 data-i18n="feat3_title">Resume Parsing</h3>
+        <p data-i18n="feat3_desc">Upload your PDF and let us auto-extract your profile — no manual entry needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommended Internships Section -->
+  <section class="recommendations" id="recommendations">
+    <h2 data-i18n="reco_title">Recommended Internships</h2>
+    <div id="internship-list" class="internship-container"></div>
+  </section>
+
+  <footer id="contact">
+    <div class="footer-logo">ROZGAR-AI</div>
+    <p data-i18n="footer_desc">Guiding students to the right opportunity</p>
+    <p style="margin-top: 10px;">&copy; 2026 ROZGAR-AI. All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
