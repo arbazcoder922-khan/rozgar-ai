@@ -64,11 +64,10 @@ const translations = {
   }
 };
 
-// Language Switch Logic
 const langSelect = document.getElementById("lang-select");
 if(langSelect) {
   langSelect.addEventListener("change", function(e) {
-    const lang = e.target.value; // 'en' or 'hi'
+    const lang = e.target.value;
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
       if(translations[lang] && translations[lang][key]) {
@@ -78,7 +77,6 @@ if(langSelect) {
   });
 }
 
-// Modal Functions (Popup for Login)
 function openModal(e) {
   if(e) e.preventDefault();
   document.getElementById("loginModal").style.display = "block";
@@ -88,7 +86,6 @@ function closeModal() {
   document.getElementById("loginModal").style.display = "none";
 }
 
-// Close modal when clicking outside of it
 window.onclick = function(event) {
   const modal = document.getElementById("loginModal");
   if (event.target === modal) {
@@ -97,7 +94,7 @@ window.onclick = function(event) {
 }
 
 // ----------------------------------------------------
-// AUTHENTICATION LOGIC (LOGIN & SIGNUP)
+// AUTHENTICATION LOGIC
 // ----------------------------------------------------
 let isLoginMode = true;
 const toggleAuthMode = document.getElementById("toggle-auth-mode");
@@ -110,7 +107,7 @@ if (toggleAuthMode) {
   toggleAuthMode.addEventListener("click", function(e) {
     e.preventDefault();
     isLoginMode = !isLoginMode;
-    authMessage.textContent = ""; // Clear errors
+    authMessage.textContent = ""; 
     
     if (isLoginMode) {
       modalTitle.textContent = "Login";
@@ -124,7 +121,6 @@ if (toggleAuthMode) {
   });
 }
 
-// Auth Submit Logic (Send to Backend)
 if(authForm) {
   authForm.addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -135,7 +131,6 @@ if(authForm) {
     authSubmitBtn.textContent = "Please wait...";
     authSubmitBtn.disabled = true;
 
-    // Yahan Backend URL daala gaya hai
     const BACKEND_URL = "https://rozgar-ai-j2nv.onrender.com";
     const endpoint = isLoginMode ? "/api/login" : "/api/signup";
 
@@ -152,21 +147,19 @@ if(authForm) {
         authMessage.style.color = "green";
         authMessage.textContent = data.message;
         
-        // Agar login hai, toh Modal band kar do aur "Login" button ka text change kardo
         if (isLoginMode) {
           setTimeout(() => {
             closeModal();
             document.querySelector(".login-btn").textContent = "Logout";
           }, 1500);
         } else {
-          // Signup success hone par Login mode me bhej do
           setTimeout(() => {
              toggleAuthMode.click();
           }, 2000);
         }
       } else {
         authMessage.style.color = "red";
-        authMessage.textContent = data.message; // "User already exists" or "Invalid password"
+        authMessage.textContent = data.message;
       }
     } catch(err) {
       console.error(err);
@@ -178,19 +171,19 @@ if(authForm) {
     }
   });
 }
-// ----------------------------------------------------
 
-// Resume Upload File Name Display
+// ----------------------------------------------------
+// FIND INTERNSHIPS LOGIC
+// ----------------------------------------------------
 const resumeInput = document.getElementById("resumeUpload");
 if(resumeInput) {
   resumeInput.addEventListener("change", function() {
     const display = document.getElementById("fileNameDisplay");
     if (this.files.length > 0) {
       display.textContent = this.files[0].name;
-      display.style.color = "#10b981"; // Green color for success
+      display.style.color = "#10b981";
       display.style.fontWeight = "600";
     } else {
-      // Revert based on language
       const lang = document.getElementById("lang-select").value;
       display.textContent = translations[lang]["upload_sub"];
       display.style.color = "#64748b";
@@ -199,7 +192,6 @@ if(resumeInput) {
   });
 }
 
-// Form Submit & API Call logic (Find Internships)
 const profileForm = document.getElementById("profile-form");
 if(profileForm) {
   profileForm.addEventListener("submit", async function(e) {
@@ -210,7 +202,6 @@ if(profileForm) {
 
     const skills = skillsInput.split(",").map(skill => skill.trim());
     
-    // Yahan hum select box se values utha rahe hain (Education, Sector, Location)
     const selects = document.querySelectorAll("select");
     const educationSelect = selects[1].value;
     const sectorSelect = selects[2].value;
@@ -225,7 +216,6 @@ if(profileForm) {
     container.innerHTML = `<p style='text-align:center; grid-column: 1/-1;'>${loadingText}</p>`;
 
     try {
-      // RENDER BACKEND API
       const response = await fetch("https://rozgar-ai-j2nv.onrender.com/api/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
