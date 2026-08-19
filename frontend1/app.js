@@ -126,8 +126,6 @@ function openDetailsModal(index) {
   document.getElementById("detail-desc").textContent = internship.description || "Apply to know more details about this role.";
   
   const applyBtn = document.getElementById("detail-apply-btn");
-  
-  // Yahan click karne par Application Form khulega
   applyBtn.onclick = function(e) {
     e.preventDefault();
     openApplicationModal(internship.company);
@@ -142,10 +140,10 @@ function closeDetailsModal() {
 }
 
 // ----------------------------------------------------
-// APPLICATION FORM MODAL (Prototype ke liye naya box)
+// APPLICATION FORM MODAL 
 // ----------------------------------------------------
 function openApplicationModal(company) {
-  closeDetailsModal(); // Purana box band karo
+  closeDetailsModal(); 
   
   let appModal = document.getElementById("applicationModal");
   if (!appModal) {
@@ -190,7 +188,7 @@ function openApplicationModal(company) {
               </div>
 
               <label>Skills</label>
-              <input type="text" placeholder="e.g. HTML, Python, Communication" required style="width: 100%; padding: 8px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+              <input type="text" placeholder="e.g. HTML, Python" required style="width: 100%; padding: 8px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
               
               <button type="submit" class="primary-btn" style="width: 100%;">Submit Application</button>
             </form>
@@ -208,7 +206,6 @@ function openApplicationModal(company) {
     `;
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-    // Jab form submit hoga toh "Congratulations" dikhayega
     document.getElementById("apply-form").addEventListener("submit", function(e) {
       e.preventDefault();
       document.getElementById("application-form-container").style.display = "none";
@@ -216,7 +213,6 @@ function openApplicationModal(company) {
     });
   }
 
-  // Form ko reset aur wapas dikhane ke liye (agar pehle submit kar chuka ho user)
   const formEl = document.getElementById("apply-form");
   if(formEl) formEl.reset();
   document.getElementById("application-form-container").style.display = "block";
@@ -231,15 +227,186 @@ function closeApplicationModal() {
   if (m) m.style.display = "none";
 }
 
-// Kahi bhi bahar click karne par modas band ho jayein
+// ----------------------------------------------------
+// DYNAMIC FEATURE DEMO ANIMATIONS (AI MAGIC)
+// ----------------------------------------------------
+
+function createFeatureModal() {
+  let featureModal = document.getElementById("featureModal");
+  if (!featureModal) {
+    const modalHTML = `
+      <div id="featureModal" class="modal">
+        <div class="modal-content" style="max-width: 500px; text-align: center;">
+          <span class="close" onclick="closeFeatureModal()">&times;</span>
+          <div id="feature-modal-body"></div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  }
+}
+
+function closeFeatureModal() {
+  document.getElementById("featureModal").style.display = "none";
+}
+
+// 1. Smart Matching Demo
+function showSmartMatchingDemo() {
+  createFeatureModal();
+  const skillsInput = document.getElementById("skills") ? document.getElementById("skills").value : "";
+  const selects = document.querySelectorAll("select");
+  const sector = (selects[2] && selects[2].value && selects[2].value !== "Choose a sector") ? selects[2].value : "IT Sector";
+  
+  const displaySkills = skillsInput ? skillsInput : "Technical Skills";
+
+  const modalBody = document.getElementById("feature-modal-body");
+  modalBody.innerHTML = `
+    <div style="font-size: 40px; margin-bottom: 15px;">🤖</div>
+    <h2 style="margin-bottom: 10px;">Smart AI Matching</h2>
+    <div style="text-align: left; margin-top: 20px; line-height: 1.8;">
+      <p id="sm-0">🧠 Analyzing your profile inputs...</p>
+      <p style="color: #10b981; display:none;" id="sm-1">✅ Career path targeted for <strong>${sector}</strong></p>
+      <p style="color: #10b981; display:none;" id="sm-2">✅ Cross-referencing <strong>${displaySkills}</strong> with active market jobs</p>
+      <p style="color: #10b981; display:none;" id="sm-3">✅ Location preferences verified...</p>
+      <div id="sm-4" style="display:none; margin-top: 20px; padding: 10px; background: #eff6ff; color: #1d4ed8; border-radius: 5px; text-align: center; font-weight: bold;">
+        Ready! Fill the form and click "Find Internships" to see the magic.
+      </div>
+    </div>
+  `;
+  document.getElementById("featureModal").style.display = "block";
+  
+  setTimeout(() => document.getElementById("sm-1").style.display = "block", 800);
+  setTimeout(() => document.getElementById("sm-2").style.display = "block", 1600);
+  setTimeout(() => document.getElementById("sm-3").style.display = "block", 2400);
+  setTimeout(() => document.getElementById("sm-4").style.display = "block", 3200);
+}
+
+// 2. Match Score Demo
+function showMatchScoreDemo() {
+  createFeatureModal();
+  const selects = document.querySelectorAll("select");
+  const education = (selects[1] && selects[1].value && selects[1].value !== "") ? selects[1].value : "Your Degree";
+
+  const modalBody = document.getElementById("feature-modal-body");
+  modalBody.innerHTML = `
+    <div style="font-size: 40px; margin-bottom: 15px;">📊</div>
+    <h2 style="margin-bottom: 10px;">How Match Score Works</h2>
+    <p style="color: #64748b; margin-bottom: 20px;">AI analyzes multiple real-time data points to score your compatibility.</p>
+    
+    <div style="text-align: left; margin-bottom: 15px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+        <strong>Skills Match</strong> <span>85%</span>
+      </div>
+      <div style="background: #e2e8f0; border-radius: 10px; height: 10px; overflow: hidden;">
+        <div style="background: #3b82f6; width: 85%; height: 100%;"></div>
+      </div>
+    </div>
+
+    <div style="text-align: left; margin-bottom: 15px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+        <strong>Education (${education})</strong> <span>100%</span>
+      </div>
+      <div style="background: #e2e8f0; border-radius: 10px; height: 10px; overflow: hidden;">
+        <div style="background: #10b981; width: 100%; height: 100%;"></div>
+      </div>
+    </div>
+
+    <div style="text-align: left; margin-bottom: 25px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+        <strong>Location Preference Match</strong> <span>90%</span>
+      </div>
+      <div style="background: #e2e8f0; border-radius: 10px; height: 10px; overflow: hidden;">
+        <div style="background: #f59e0b; width: 90%; height: 100%;"></div>
+      </div>
+    </div>
+
+    <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+      <h3 style="color: #0f172a; margin: 0;">Total AI Match: <span style="color: #10b981;">92%</span></h3>
+      <p style="margin: 5px 0 0 0; font-size: 14px; color: #64748b;">Highly Recommended for you!</p>
+    </div>
+  `;
+  document.getElementById("featureModal").style.display = "block";
+}
+
+// 3. Resume Parsing Demo (Uses real typed data!)
+function showResumeParsingDemo() {
+  createFeatureModal();
+  const fileInput = document.getElementById("resumeUpload");
+  const skillsInput = document.getElementById("skills") ? document.getElementById("skills").value : "";
+  const selects = document.querySelectorAll("select");
+  const education = (selects[1] && selects[1].value && selects[1].value !== "") ? selects[1].value : "";
+  
+  let fileName = "No file uploaded";
+  let hasFile = false;
+  if(fileInput && fileInput.files.length > 0) {
+    fileName = fileInput.files[0].name;
+    hasFile = true;
+  }
+
+  const modalBody = document.getElementById("feature-modal-body");
+  
+  if(!hasFile || !skillsInput || !education) {
+    modalBody.innerHTML = `
+      <div style="font-size: 40px; margin-bottom: 15px;">📄</div>
+      <h2 style="margin-bottom: 10px;">Live Resume Parsing</h2>
+      <p style="color: #ef4444; padding: 10px; background: #fef2f2; border-radius: 5px;">
+        ⚠️ Please fill out your <b>Education</b>, <b>Skills</b>, and <b>Upload a Resume (PDF)</b> in the profile section above first to see this magic live!
+      </p>
+    `;
+  } else {
+    modalBody.innerHTML = `
+      <div style="font-size: 40px; margin-bottom: 15px;" id="parsing-icon">⏳</div>
+      <h2 style="margin-bottom: 10px;">Live Resume Parsing</h2>
+      <div id="parsing-status" style="color: #3b82f6; font-weight: bold; margin-bottom: 20px;">Reading document: ${fileName}...</div>
+      
+      <div id="parsing-result" style="display: none; text-align: left; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <p style="margin-bottom: 8px;"><strong>File Processed:</strong> <span style="color:#10b981;">${fileName}</span> ✅</p>
+        <p style="margin-bottom: 8px;"><strong>Education Found:</strong> <span style="color:#10b981;">${education}</span> ✅</p>
+        <p style="margin-bottom: 8px;"><strong>Skills Extracted:</strong> <span style="color:#10b981;">${skillsInput}</span> ✅</p>
+        <p style="margin-top: 15px; font-size: 14px; color: #64748b; text-align: center;">AI successfully mapped your resume data to the form fields!</p>
+      </div>
+    `;
+    
+    setTimeout(() => {
+      document.getElementById("parsing-icon").textContent = "✅";
+      document.getElementById("parsing-status").textContent = "Extraction Complete!";
+      document.getElementById("parsing-status").style.color = "#10b981";
+      document.getElementById("parsing-result").style.display = "block";
+    }, 2000);
+  }
+  
+  document.getElementById("featureModal").style.display = "block";
+}
+
+// Make the cards clickable once page loads
+document.addEventListener("DOMContentLoaded", function() {
+  const featureCards = document.querySelectorAll(".feature-card");
+  if (featureCards.length >= 3) {
+    featureCards[0].style.cursor = "pointer";
+    featureCards[0].onclick = () => showSmartMatchingDemo();
+
+    featureCards[1].style.cursor = "pointer";
+    featureCards[1].onclick = () => showMatchScoreDemo();
+
+    featureCards[2].style.cursor = "pointer";
+    featureCards[2].onclick = () => showResumeParsingDemo();
+    
+    featureCards.forEach(card => {
+      card.title = "Click to view Live Demo";
+    });
+  }
+});
+
 window.onclick = function(event) {
   const loginModal = document.getElementById("loginModal");
   const detailsModal = document.getElementById("detailsModal");
   const applicationModal = document.getElementById("applicationModal");
+  const featureModal = document.getElementById("featureModal");
   
   if (event.target === loginModal) closeModal();
   if (event.target === detailsModal) closeDetailsModal();
   if (event.target === applicationModal) closeApplicationModal();
+  if (event.target === featureModal) closeFeatureModal();
 }
 
 // ----------------------------------------------------
