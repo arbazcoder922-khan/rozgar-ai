@@ -236,6 +236,25 @@
     <p data-i18n="footer_desc">Guiding students to the right opportunity</p>
     <p style="margin-top: 10px;">© 2026 ROZGAR-AI. All rights reserved.</p>
   </footer>
+        <!-- Internship Details Modal -->
+      <div id="detailsModal" class="modal">
+        <div class="modal-content" style="max-width: 500px; text-align: left;">
+          <span class="close" onclick="closeDetailsModal()">&times;</span>
+          <h2 id="detail-title" style="margin-bottom: 5px;">Internship Title</h2>
+          <h4 id="detail-company" style="color: #64748b; margin-bottom: 20px;">Company Name - Location</h4>
+          
+          <div style="line-height: 1.8; font-size: 15px; color: #334155;">
+            <p><strong>Eligibility:</strong> <span id="detail-eligibility">...</span></p>
+            <p><strong>Type:</strong> <span id="detail-type">...</span></p>
+            <p><strong>Stipend/Salary:</strong> <span id="detail-stipend">...</span></p>
+            <p><strong>Description:</strong> <span id="detail-desc">...</span></p>
+          </div>
+          
+          <div style="margin-top: 25px; text-align: center;">
+            <a href="#" id="detail-apply-btn" target="_blank" class="primary-btn" style="display:inline-block; width: 100%;">Apply Now</a>
+          </div>
+        </div>
+      </div>
 
   <script src="app.js"></script>
 
