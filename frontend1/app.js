@@ -87,7 +87,7 @@ function closeModal() {
 }
 
 // ----------------------------------------------------
-// SMART DETAILS MODAL (HTML is created dynamically)
+// SMART DETAILS MODAL
 // ----------------------------------------------------
 let currentInternships = [];
 
@@ -126,17 +126,14 @@ function openDetailsModal(index) {
   document.getElementById("detail-desc").textContent = internship.description || "Apply via link to know more details about this role.";
   
   const applyBtn = document.getElementById("detail-apply-btn");
-  if(internship.apply_link) {
-    applyBtn.href = internship.apply_link;
-    applyBtn.textContent = "Apply Now";
-    applyBtn.style.backgroundColor = "#2563eb";
-    applyBtn.style.pointerEvents = "auto";
-  } else {
-    applyBtn.href = "javascript:void(0)";
-    applyBtn.textContent = "Apply Link Not Provided";
-    applyBtn.style.backgroundColor = "#94a3b8";
-    applyBtn.style.pointerEvents = "none";
-  }
+  
+  // YAHAN DEFAULT LINK LAGA DIYA HAI
+  const defaultApplyLink = "https://docs.google.com/forms/"; 
+  
+  applyBtn.href = internship.apply_link || defaultApplyLink;
+  applyBtn.textContent = "Apply Now";
+  applyBtn.style.backgroundColor = "#2563eb";
+  applyBtn.style.pointerEvents = "auto";
   
   document.getElementById("detailsModal").style.display = "block";
 }
