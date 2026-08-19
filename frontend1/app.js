@@ -84,13 +84,12 @@ function openModal(e) {
   if(e) e.preventDefault();
   document.getElementById("loginModal").style.display = "block";
 }
-
 function closeModal() {
   document.getElementById("loginModal").style.display = "none";
 }
 
 // ----------------------------------------------------
-// INTERNSHIP DETAILS MODAL (NAYA ADD KIYA HAI)
+// INTERNSHIP DETAILS MODAL
 // ----------------------------------------------------
 let currentInternships = [];
 
@@ -129,12 +128,8 @@ function closeDetailsModal() {
 window.onclick = function(event) {
   const loginModal = document.getElementById("loginModal");
   const detailsModal = document.getElementById("detailsModal");
-  if (event.target === loginModal) {
-    closeModal();
-  }
-  if (event.target === detailsModal) {
-    closeDetailsModal();
-  }
+  if (event.target === loginModal) closeModal();
+  if (event.target === detailsModal) closeDetailsModal();
 }
 
 // ----------------------------------------------------
@@ -192,23 +187,17 @@ if(authForm) {
         authMessage.textContent = data.message;
         
         if (isLoginMode) {
-          setTimeout(() => {
-            closeModal();
-            document.querySelector(".login-btn").textContent = "Logout";
-          }, 1500);
+          setTimeout(() => { closeModal(); document.querySelector(".login-btn").textContent = "Logout"; }, 1500);
         } else {
-          setTimeout(() => {
-             toggleAuthMode.click();
-          }, 2000);
+          setTimeout(() => { toggleAuthMode.click(); }, 2000);
         }
       } else {
         authMessage.style.color = "red";
         authMessage.textContent = data.message;
       }
     } catch(err) {
-      console.error(err);
       authMessage.style.color = "red";
-      authMessage.textContent = "Server se connect nahi ho saka. Kripya baad me try karein.";
+      authMessage.textContent = "Server error. Kripya baad me try karein.";
     } finally {
       authSubmitBtn.disabled = false;
       authSubmitBtn.textContent = isLoginMode ? "Login" : "Create Account";
@@ -243,7 +232,6 @@ if(profileForm) {
 
     const skillsInput = document.getElementById("skills").value;
     if(!skillsInput) return;
-
     const skills = skillsInput.split(",").map(skill => skill.trim());
     
     const selects = document.querySelectorAll("select");
@@ -276,7 +264,7 @@ if(profileForm) {
       container.innerHTML = "";
 
       if(!currentInternships || currentInternships.length === 0) {
-        const noResult = lang === 'hi' ? "इस समय आपके कौशल से मेल कौशल से मेल खाने वाली कोई इंटर्नशिप नहीं मिली।" : "No internships found matching your skills right now.";
+        const noResult = lang === 'hi' ? "इस समय आपके कौशल से मेल खाने वाली कोई इंटर्नशिप नहीं मिली।" : "No internships found matching your skills right now.";
         container.innerHTML = `<p style='text-align:center; grid-column: 1/-1;'>${noResult}</p>`;
         return;
       }
@@ -297,9 +285,7 @@ if(profileForm) {
         container.innerHTML += card;
       });
     } catch(err) {
-      console.error(err);
-      const errorText = lang === 'hi' ? "सर्वर से कनेक्ट नहीं हो सका।" : "Could not connect to the server.";
-      container.innerHTML = `<p style='text-align:center; grid-column: 1/-1; color: red;'>${errorText}</p>`;
+      container.innerHTML = `<p style='text-align:center; grid-column: 1/-1; color: red;'>Could not connect to the server.</p>`;
     }
   });
 }

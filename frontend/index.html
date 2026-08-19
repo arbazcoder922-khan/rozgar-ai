@@ -30,23 +30,17 @@
         <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
           <h2 id="modal-title">Login</h2>
-
           <form id="auth-form">
             <label>Email</label>
             <input type="email" id="auth-email" placeholder="Enter your email" required>
-
             <label>Password</label>
             <input type="password" id="auth-password" placeholder="Enter your password" required>
-            
             <div id="auth-message" style="margin-top:10px; font-size:14px; text-align:center;"></div>
-
             <button type="submit" class="primary-btn" id="auth-submit-btn" style="margin-top:15px;">Login</button>
-            
             <div style="margin-top:15px; text-align:center; font-size:14px;">
               <a href="#" id="toggle-auth-mode" style="color: #2563eb; text-decoration: none;">Don't have an account? Sign up</a>
             </div>
           </form>
-
           <div class="divider">OR</div>
           <button class="google-btn">Sign in with Google</button>
         </div>
@@ -96,7 +90,6 @@
   <!-- Profile Box -->
   <section class="profile">
     <form id="profile-form" class="profile-form">
-      
       <label><strong data-i18n="label_education">Education Level *</strong></label>
       <select required>
         <option value="">Select your degree</option>
@@ -196,7 +189,6 @@
     </form>
   </section>
 
-  <!-- Features Section -->
   <section class="features" id="features">
     <h2 data-i18n="features_title">Why ROZGAR-AI?</h2>
     <p class="section-description" data-i18n="features_desc">
@@ -209,13 +201,11 @@
         <h3 data-i18n="feat1_title">Smart Matching</h3>
         <p data-i18n="feat1_desc">AI analyzes your skills, education, and interests to surface the most relevant roles.</p>
       </div>
-
       <div class="feature-card">
         <div class="feature-icon">📊</div>
         <h3 data-i18n="feat2_title">Match Scores</h3>
         <p data-i18n="feat2_desc">Each listing shows a compatibility percentage so you can prioritize your applications.</p>
       </div>
-
       <div class="feature-card">
         <div class="feature-icon">📄</div>
         <h3 data-i18n="feat3_title">Resume Parsing</h3>
@@ -236,27 +226,7 @@
     <p data-i18n="footer_desc">Guiding students to the right opportunity</p>
     <p style="margin-top: 10px;">© 2026 ROZGAR-AI. All rights reserved.</p>
   </footer>
-        <!-- Internship Details Modal -->
-      <div id="detailsModal" class="modal">
-        <div class="modal-content" style="max-width: 500px; text-align: left;">
-          <span class="close" onclick="closeDetailsModal()">&times;</span>
-          <h2 id="detail-title" style="margin-bottom: 5px;">Internship Title</h2>
-          <h4 id="detail-company" style="color: #64748b; margin-bottom: 20px;">Company Name - Location</h4>
-          
-          <div style="line-height: 1.8; font-size: 15px; color: #334155;">
-            <p><strong>Eligibility:</strong> <span id="detail-eligibility">...</span></p>
-            <p><strong>Type:</strong> <span id="detail-type">...</span></p>
-            <p><strong>Stipend/Salary:</strong> <span id="detail-stipend">...</span></p>
-            <p><strong>Description:</strong> <span id="detail-desc">...</span></p>
-          </div>
-          
-          <div style="margin-top: 25px; text-align: center;">
-            <a href="#" id="detail-apply-btn" target="_blank" class="primary-btn" style="display:inline-block; width: 100%;">Apply Now</a>
-          </div>
-        </div>
-      </div>
 
   <script src="app.js"></script>
-
 </body>
 </html>
