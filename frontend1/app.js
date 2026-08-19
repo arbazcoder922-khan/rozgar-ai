@@ -77,6 +77,9 @@ if(langSelect) {
   });
 }
 
+// ----------------------------------------------------
+// LOGIN MODAL
+// ----------------------------------------------------
 function openModal(e) {
   if(e) e.preventDefault();
   document.getElementById("loginModal").style.display = "block";
@@ -86,10 +89,51 @@ function closeModal() {
   document.getElementById("loginModal").style.display = "none";
 }
 
+// ----------------------------------------------------
+// INTERNSHIP DETAILS MODAL (NAYA ADD KIYA HAI)
+// ----------------------------------------------------
+let currentInternships = [];
+
+function openDetailsModal(index) {
+  const internship = currentInternships[index];
+  
+  document.getElementById("detail-title").textContent = internship.title;
+  document.getElementById("detail-company").textContent = internship.company + " - " + internship.location;
+  
+  // Backend se details aayengi, agar nahi hui toh default text dikhega
+  document.getElementById("detail-eligibility").textContent = internship.eligibility || "B.Tech / Relevant Degree";
+  document.getElementById("detail-type").textContent = internship.type || "Paid Internship";
+  document.getElementById("detail-stipend").textContent = internship.stipend || "₹10,000 - ₹20,000 / month";
+  document.getElementById("detail-desc").textContent = internship.description || "Apply via link to know more details about this role.";
+  
+  const applyBtn = document.getElementById("detail-apply-btn");
+  if(internship.apply_link) {
+    applyBtn.href = internship.apply_link;
+    applyBtn.textContent = "Apply Now";
+    applyBtn.style.backgroundColor = "#2563eb";
+    applyBtn.style.pointerEvents = "auto";
+  } else {
+    applyBtn.href = "javascript:void(0)";
+    applyBtn.textContent = "Apply Link Not Provided";
+    applyBtn.style.backgroundColor = "#94a3b8";
+    applyBtn.style.pointerEvents = "none";
+  }
+  
+  document.getElementById("detailsModal").style.display = "block";
+}
+
+function closeDetailsModal() {
+  document.getElementById("detailsModal").style.display = "none";
+}
+
 window.onclick = function(event) {
-  const modal = document.getElementById("loginModal");
-  if (event.target === modal) {
+  const loginModal = document.getElementById("loginModal");
+  const detailsModal = document.getElementById("detailsModal");
+  if (event.target === loginModal) {
     closeModal();
+  }
+  if (event.target === detailsModal) {
+    closeDetailsModal();
   }
 }
 
@@ -228,20 +272,18 @@ if(profileForm) {
       });
 
       const result = await response.json();
-      const data = result.recommendations; 
+      currentInternships = result.recommendations; 
       container.innerHTML = "";
 
-      if(!data || data.length === 0) {
-        const noResult = lang === 'hi' ? "इस समय आपके कौशल से मेल खाने वाली कोई इंटर्नशिप नहीं मिली।" : "No internships found matching your skills right now.";
+      if(!currentInternships || currentInternships.length === 0) {
+        const noResult = lang === 'hi' ? "इस समय आपके कौशल से मेल कौशल से मेल खाने वाली कोई इंटर्नशिप नहीं मिली।" : "No internships found matching your skills right now.";
         container.innerHTML = `<p style='text-align:center; grid-column: 1/-1;'>${noResult}</p>`;
         return;
       }
 
-      data.forEach(internship => {
+      currentInternships.forEach((internship, index) => {
         const viewBtnText = lang === 'hi' ? "विवरण देखें" : "View Details";
         const matchText = lang === 'hi' ? "स्कोर:" : "Score:";
-        // Nayi line jisme alert lagaya gaya hai
-        const alertMsg = lang === 'hi' ? 'इंटर्नशिप विवरण पेज जल्द ही आ रहा है!' : 'Internship details page is coming soon!';
         
         const card = `
           <div class="internship-card">
@@ -249,7 +291,7 @@ if(profileForm) {
             <h3>${internship.title}</h3>
             <p><strong>${internship.company}</strong> – ${internship.location}</p>
             <p><strong>${matchText}</strong> ${internship.score}</p>
-            <a href="javascript:void(0)" onclick="alert('${alertMsg}')" class="details-btn">${viewBtnText}</a>
+            <a href="javascript:void(0)" onclick="openDetailsModal(${index})" class="details-btn">${viewBtnText}</a>
           </div>
         `;
         container.innerHTML += card;

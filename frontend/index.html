@@ -25,13 +25,12 @@
       <!-- Login Button -->
       <a href="#" class="login-btn" onclick="openModal()" data-i18n="nav_login">Login / Sign Up</a>
 
-      <!-- Modal -->
+      <!-- Login Modal -->
       <div id="loginModal" class="modal">
         <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
           <h2 id="modal-title">Login</h2>
 
-          <!-- FORM START (ID lagaya gaya hai) -->
           <form id="auth-form">
             <label>Email</label>
             <input type="email" id="auth-email" placeholder="Enter your email" required>
@@ -39,7 +38,6 @@
             <label>Password</label>
             <input type="password" id="auth-password" placeholder="Enter your password" required>
             
-            <!-- Message dikhane ke liye -->
             <div id="auth-message" style="margin-top:10px; font-size:14px; text-align:center;"></div>
 
             <button type="submit" class="primary-btn" id="auth-submit-btn" style="margin-top:15px;">Login</button>
@@ -48,14 +46,32 @@
               <a href="#" id="toggle-auth-mode" style="color: #2563eb; text-decoration: none;">Don't have an account? Sign up</a>
             </div>
           </form>
-          <!-- FORM END -->
 
           <div class="divider">OR</div>
-
-          <!-- Google Sign In -->
           <button class="google-btn">Sign in with Google</button>
         </div>
       </div>
+
+      <!-- Internship Details Modal (Naya Box) -->
+      <div id="detailsModal" class="modal">
+        <div class="modal-content" style="max-width: 500px; text-align: left;">
+          <span class="close" onclick="closeDetailsModal()">&times;</span>
+          <h2 id="detail-title" style="margin-bottom: 5px;">Internship Title</h2>
+          <h4 id="detail-company" style="color: #64748b; margin-bottom: 20px;">Company Name - Location</h4>
+          
+          <div style="line-height: 1.8; font-size: 15px; color: #334155;">
+            <p><strong>Eligibility:</strong> <span id="detail-eligibility">...</span></p>
+            <p><strong>Type:</strong> <span id="detail-type">...</span></p>
+            <p><strong>Stipend/Salary:</strong> <span id="detail-stipend">...</span></p>
+            <p><strong>Description:</strong> <span id="detail-desc">...</span></p>
+          </div>
+          
+          <div style="margin-top: 25px; text-align: center;">
+            <a href="#" id="detail-apply-btn" target="_blank" class="primary-btn" style="display:inline-block; width: 100%;">Apply Now</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </nav>
 
@@ -158,6 +174,13 @@
         <option>Uttarakhand</option>
         <option>West Bengal</option>
         <option>Delhi (NCT)</option>
+        <option>Jammu & Kashmir</option>
+        <option>Ladakh</option>
+        <option>Puducherry</option>
+        <option>Chandigarh</option>
+        <option>Andaman & Nicobar Islands</option>
+        <option>Dadra & Nagar Haveli and Daman & Diu</option>
+        <option>Lakshadweep</option>
       </select>
 
       <label><strong data-i18n="label_resume">Resume (PDF or DOC, max 5MB)</strong></label>
@@ -173,6 +196,7 @@
     </form>
   </section>
 
+  <!-- Features Section -->
   <section class="features" id="features">
     <h2 data-i18n="features_title">Why ROZGAR-AI?</h2>
     <p class="section-description" data-i18n="features_desc">
@@ -206,13 +230,13 @@
     <div id="internship-list" class="internship-container"></div>
   </section>
 
+  <!-- Footer Section -->
   <footer id="contact">
     <div class="footer-logo">ROZGAR-AI</div>
     <p data-i18n="footer_desc">Guiding students to the right opportunity</p>
     <p style="margin-top: 10px;">© 2026 ROZGAR-AI. All rights reserved.</p>
   </footer>
 
-  <!-- YAHAN PAR APP.JS LINK HUI HAI JISSE FORM KAAM KAREGA -->
   <script src="app.js"></script>
 
 </body>
