@@ -99,7 +99,7 @@ function openDetailsModal(index) {
   if (!modal) {
     const modalHTML = `
       <div id="detailsModal" class="modal">
-        <div class="modal-content" style="max-width: 500px; text-align: left;">
+        <div class="modal-content" style="max-width: 500px; text-align: left; max-height: 85vh; overflow-y: auto;">
           <span class="close" onclick="closeDetailsModal()">&times;</span>
           <h2 id="detail-title" style="margin-bottom: 5px;"></h2>
           <h4 id="detail-company" style="color: #64748b; margin-bottom: 20px;"></h4>
@@ -140,7 +140,7 @@ function closeDetailsModal() {
 }
 
 // ----------------------------------------------------
-// APPLICATION FORM MODAL 
+// APPLICATION FORM MODAL (with scrollbar)
 // ----------------------------------------------------
 function openApplicationModal(company) {
   closeDetailsModal(); 
@@ -149,7 +149,7 @@ function openApplicationModal(company) {
   if (!appModal) {
     const modalHTML = `
       <div id="applicationModal" class="modal">
-        <div class="modal-content" style="max-width: 500px; text-align: left;">
+        <div class="modal-content" style="max-width: 500px; text-align: left; max-height: 85vh; overflow-y: auto;">
           <span class="close" onclick="closeApplicationModal()">&times;</span>
           <h2 style="margin-bottom: 5px;">Apply for Internship</h2>
           <h4 id="apply-company-name" style="color: #64748b; margin-bottom: 20px;"></h4>
@@ -228,7 +228,7 @@ function closeApplicationModal() {
 }
 
 // ----------------------------------------------------
-// DYNAMIC FEATURE DEMO ANIMATIONS (AI MAGIC)
+// DYNAMIC FEATURE DEMO ANIMATIONS
 // ----------------------------------------------------
 
 function createFeatureModal() {
@@ -236,7 +236,7 @@ function createFeatureModal() {
   if (!featureModal) {
     const modalHTML = `
       <div id="featureModal" class="modal">
-        <div class="modal-content" style="max-width: 500px; text-align: center;">
+        <div class="modal-content" style="max-width: 500px; text-align: center; max-height: 85vh; overflow-y: auto;">
           <span class="close" onclick="closeFeatureModal()">&times;</span>
           <div id="feature-modal-body"></div>
         </div>
@@ -250,7 +250,6 @@ function closeFeatureModal() {
   document.getElementById("featureModal").style.display = "none";
 }
 
-// 1. Smart Matching Demo
 function showSmartMatchingDemo() {
   createFeatureModal();
   const skillsInput = document.getElementById("skills") ? document.getElementById("skills").value : "";
@@ -281,7 +280,6 @@ function showSmartMatchingDemo() {
   setTimeout(() => document.getElementById("sm-4").style.display = "block", 3200);
 }
 
-// 2. Match Score Demo
 function showMatchScoreDemo() {
   createFeatureModal();
   const selects = document.querySelectorAll("select");
@@ -328,7 +326,6 @@ function showMatchScoreDemo() {
   document.getElementById("featureModal").style.display = "block";
 }
 
-// 3. Resume Parsing Demo (Uses real typed data!)
 function showResumeParsingDemo() {
   createFeatureModal();
   const fileInput = document.getElementById("resumeUpload");
@@ -378,7 +375,6 @@ function showResumeParsingDemo() {
   document.getElementById("featureModal").style.display = "block";
 }
 
-// Make the cards clickable once page loads
 document.addEventListener("DOMContentLoaded", function() {
   const featureCards = document.querySelectorAll(".feature-card");
   if (featureCards.length >= 3) {
