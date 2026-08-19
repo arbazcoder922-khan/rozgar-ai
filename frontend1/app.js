@@ -77,29 +77,49 @@ if(langSelect) {
   });
 }
 
-// ----------------------------------------------------
-// LOGIN MODAL
-// ----------------------------------------------------
 function openModal(e) {
   if(e) e.preventDefault();
   document.getElementById("loginModal").style.display = "block";
 }
+
 function closeModal() {
   document.getElementById("loginModal").style.display = "none";
 }
 
 // ----------------------------------------------------
-// INTERNSHIP DETAILS MODAL
+// SMART DETAILS MODAL (HTML is created dynamically)
 // ----------------------------------------------------
 let currentInternships = [];
 
 function openDetailsModal(index) {
   const internship = currentInternships[index];
+  if (!internship) return;
+  
+  let modal = document.getElementById("detailsModal");
+  if (!modal) {
+    const modalHTML = `
+      <div id="detailsModal" class="modal">
+        <div class="modal-content" style="max-width: 500px; text-align: left;">
+          <span class="close" onclick="closeDetailsModal()">&times;</span>
+          <h2 id="detail-title" style="margin-bottom: 5px;"></h2>
+          <h4 id="detail-company" style="color: #64748b; margin-bottom: 20px;"></h4>
+          <div style="line-height: 1.8; font-size: 15px; color: #334155;">
+            <p><strong>Eligibility:</strong> <span id="detail-eligibility"></span></p>
+            <p><strong>Type:</strong> <span id="detail-type"></span></p>
+            <p><strong>Stipend/Salary:</strong> <span id="detail-stipend"></span></p>
+            <p><strong>Description:</strong> <span id="detail-desc"></span></p>
+          </div>
+          <div style="margin-top: 25px; text-align: center;">
+            <a href="#" id="detail-apply-btn" target="_blank" class="primary-btn" style="display:inline-block; width: 100%;">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  }
   
   document.getElementById("detail-title").textContent = internship.title;
   document.getElementById("detail-company").textContent = internship.company + " - " + internship.location;
-  
-  // Backend se details aayengi, agar nahi hui toh default text dikhega
   document.getElementById("detail-eligibility").textContent = internship.eligibility || "B.Tech / Relevant Degree";
   document.getElementById("detail-type").textContent = internship.type || "Paid Internship";
   document.getElementById("detail-stipend").textContent = internship.stipend || "₹10,000 - ₹20,000 / month";
@@ -122,7 +142,8 @@ function openDetailsModal(index) {
 }
 
 function closeDetailsModal() {
-  document.getElementById("detailsModal").style.display = "none";
+  const m = document.getElementById("detailsModal");
+  if (m) m.style.display = "none";
 }
 
 window.onclick = function(event) {
@@ -163,10 +184,8 @@ if (toggleAuthMode) {
 if(authForm) {
   authForm.addEventListener("submit", async function(e) {
     e.preventDefault();
-    
     const email = document.getElementById("auth-email").value;
     const password = document.getElementById("auth-password").value;
-    
     authSubmitBtn.textContent = "Please wait...";
     authSubmitBtn.disabled = true;
 
@@ -179,13 +198,10 @@ if(authForm) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, password: password })
       });
-
       const data = await response.json();
-
       if(data.success) {
         authMessage.style.color = "green";
         authMessage.textContent = data.message;
-        
         if (isLoginMode) {
           setTimeout(() => { closeModal(); document.querySelector(".login-btn").textContent = "Logout"; }, 1500);
         } else {
@@ -229,7 +245,6 @@ const profileForm = document.getElementById("profile-form");
 if(profileForm) {
   profileForm.addEventListener("submit", async function(e) {
     e.preventDefault();
-
     const skillsInput = document.getElementById("skills").value;
     if(!skillsInput) return;
     const skills = skillsInput.split(",").map(skill => skill.trim());
