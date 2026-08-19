@@ -110,7 +110,7 @@ function openDetailsModal(index) {
             <p><strong>Description:</strong> <span id="detail-desc"></span></p>
           </div>
           <div style="margin-top: 25px; text-align: center;">
-            <a href="#" id="detail-apply-btn" target="_blank" class="primary-btn" style="display:inline-block; width: 100%;">Apply Now</a>
+            <a href="#" id="detail-apply-btn" class="primary-btn" style="display:inline-block; width: 100%;">Apply Now</a>
           </div>
         </div>
       </div>
@@ -123,17 +123,15 @@ function openDetailsModal(index) {
   document.getElementById("detail-eligibility").textContent = internship.eligibility || "B.Tech / Relevant Degree";
   document.getElementById("detail-type").textContent = internship.type || "Paid Internship";
   document.getElementById("detail-stipend").textContent = internship.stipend || "₹10,000 - ₹20,000 / month";
-  document.getElementById("detail-desc").textContent = internship.description || "Apply via link to know more details about this role.";
+  document.getElementById("detail-desc").textContent = internship.description || "Apply to know more details about this role.";
   
   const applyBtn = document.getElementById("detail-apply-btn");
   
-  // YAHAN DEFAULT LINK LAGA DIYA HAI
-  const defaultApplyLink = "https://docs.google.com/forms/"; 
-  
-  applyBtn.href = internship.apply_link || defaultApplyLink;
-  applyBtn.textContent = "Apply Now";
-  applyBtn.style.backgroundColor = "#2563eb";
-  applyBtn.style.pointerEvents = "auto";
+  // Yahan click karne par Application Form khulega
+  applyBtn.onclick = function(e) {
+    e.preventDefault();
+    openApplicationModal(internship.company);
+  };
   
   document.getElementById("detailsModal").style.display = "block";
 }
@@ -143,11 +141,105 @@ function closeDetailsModal() {
   if (m) m.style.display = "none";
 }
 
+// ----------------------------------------------------
+// APPLICATION FORM MODAL (Prototype ke liye naya box)
+// ----------------------------------------------------
+function openApplicationModal(company) {
+  closeDetailsModal(); // Purana box band karo
+  
+  let appModal = document.getElementById("applicationModal");
+  if (!appModal) {
+    const modalHTML = `
+      <div id="applicationModal" class="modal">
+        <div class="modal-content" style="max-width: 500px; text-align: left;">
+          <span class="close" onclick="closeApplicationModal()">&times;</span>
+          <h2 style="margin-bottom: 5px;">Apply for Internship</h2>
+          <h4 id="apply-company-name" style="color: #64748b; margin-bottom: 20px;"></h4>
+          
+          <div id="application-form-container">
+            <form id="apply-form">
+              <label>Full Name</label>
+              <input type="text" placeholder="Enter your full name" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+              
+              <label>Email ID</label>
+              <input type="email" placeholder="Enter your email" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+              
+              <label>Phone No</label>
+              <input type="tel" placeholder="Enter your phone number" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+              
+              <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <div style="flex: 1;">
+                  <label>DOB</label>
+                  <input type="date" required style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+                </div>
+                <div style="flex: 1;">
+                  <label>City & State</label>
+                  <input type="text" placeholder="e.g. Delhi, NCR" required style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <div style="flex: 1;">
+                  <label>10th Marks (%)</label>
+                  <input type="number" placeholder="e.g. 85" required style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+                </div>
+                <div style="flex: 1;">
+                  <label>12th Marks (%)</label>
+                  <input type="number" placeholder="e.g. 80" required style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+                </div>
+              </div>
+
+              <label>Skills</label>
+              <input type="text" placeholder="e.g. HTML, Python, Communication" required style="width: 100%; padding: 8px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #cbd5e1; box-sizing: border-box;">
+              
+              <button type="submit" class="primary-btn" style="width: 100%;">Submit Application</button>
+            </form>
+          </div>
+          
+          <div id="application-success" style="display: none; text-align: center; padding: 20px 0;">
+            <div style="font-size: 40px; color: #10b981; margin-bottom: 10px;">✅</div>
+            <h3 style="color: #10b981;">Congratulations!</h3>
+            <p style="margin-top: 10px; color: #334155; line-height: 1.5;">Your data has been recorded successfully.<br>Please wait some time, our team will contact you soon.</p>
+            <button onclick="closeApplicationModal()" class="primary-btn" style="margin-top: 20px;">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Jab form submit hoga toh "Congratulations" dikhayega
+    document.getElementById("apply-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("application-form-container").style.display = "none";
+      document.getElementById("application-success").style.display = "block";
+    });
+  }
+
+  // Form ko reset aur wapas dikhane ke liye (agar pehle submit kar chuka ho user)
+  const formEl = document.getElementById("apply-form");
+  if(formEl) formEl.reset();
+  document.getElementById("application-form-container").style.display = "block";
+  document.getElementById("application-success").style.display = "none";
+
+  document.getElementById("apply-company-name").textContent = "Applying at " + company;
+  document.getElementById("applicationModal").style.display = "block";
+}
+
+function closeApplicationModal() {
+  const m = document.getElementById("applicationModal");
+  if (m) m.style.display = "none";
+}
+
+// Kahi bhi bahar click karne par modas band ho jayein
 window.onclick = function(event) {
   const loginModal = document.getElementById("loginModal");
   const detailsModal = document.getElementById("detailsModal");
+  const applicationModal = document.getElementById("applicationModal");
+  
   if (event.target === loginModal) closeModal();
   if (event.target === detailsModal) closeDetailsModal();
+  if (event.target === applicationModal) closeApplicationModal();
 }
 
 // ----------------------------------------------------
