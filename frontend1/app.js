@@ -240,6 +240,8 @@ if(profileForm) {
       data.forEach(internship => {
         const viewBtnText = lang === 'hi' ? "विवरण देखें" : "View Details";
         const matchText = lang === 'hi' ? "स्कोर:" : "Score:";
+        // Nayi line jisme alert lagaya gaya hai
+        const alertMsg = lang === 'hi' ? 'इंटर्नशिप विवरण पेज जल्द ही आ रहा है!' : 'Internship details page is coming soon!';
         
         const card = `
           <div class="internship-card">
@@ -247,7 +249,7 @@ if(profileForm) {
             <h3>${internship.title}</h3>
             <p><strong>${internship.company}</strong> – ${internship.location}</p>
             <p><strong>${matchText}</strong> ${internship.score}</p>
-            <a href="#" class="details-btn">${viewBtnText}</a>
+            <a href="javascript:void(0)" onclick="alert('${alertMsg}')" class="details-btn">${viewBtnText}</a>
           </div>
         `;
         container.innerHTML += card;
